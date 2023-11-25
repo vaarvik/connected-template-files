@@ -2,7 +2,7 @@ import * as path from 'path';
 import * as vscode from 'vscode';
 
 export async function resolveFolderPath(
-    uri: vscode.Uri
+    uri: vscode.Uri | null
 ): Promise<string | undefined> {
     if (uri && uri.fsPath) {
         // Action triggered by right-clicking on a folder
@@ -11,7 +11,9 @@ export async function resolveFolderPath(
 
     // Prompt user for path resolution method
     const userChoice = await promptForPathResolutionMethod();
-    if (!userChoice) return;
+    if (!userChoice) {
+        return;
+    }
 
     return userChoice === 'CURRENT_DIRECTORY'
         ? getCurrentDirectoryPath()
@@ -43,7 +45,9 @@ async function getCustomFolderPath(): Promise<string | undefined> {
     const input = await vscode.window.showInputBox({
         prompt: 'Enter the path for the new component (relative or absolute)',
     });
-    if (!input) return;
+    if (!input) {
+        return;
+    }
 
     const workspaceRoot = vscode.workspace.rootPath || '';
     const basePath = getCurrentDirectoryPath() || workspaceRoot;

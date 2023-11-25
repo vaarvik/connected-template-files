@@ -5,13 +5,17 @@ import { resolveFolderPath } from '../utils/pathResolver';
 export async function createComponentCommand(uri: vscode.Uri) {
     const folderPath = await resolveFolderPath(uri);
 
-    if (!folderPath) return; // exit if no folder path resolved
+    if (!folderPath) {
+        return;
+    } // exit if no folder path resolved
 
     const componentName = await vscode.window.showInputBox({
         prompt: 'Enter Component Name',
     });
 
-    if (!componentName) return; // exit if no name is provided
+    if (!componentName) {
+        return;
+    } // exit if no name is provided
 
     try {
         await createComponentFiles(folderPath, componentName);
