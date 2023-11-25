@@ -34,7 +34,7 @@ function getComponentTemplate(componentName: string): string {
 }
 
 function getIndexTemplate(componentName: string): string {
-    return `export { default } from './__COMPONENT_NAME__';`;
+    return `export { default } from "./${componentName}"`;
 }
 
 async function openComponentFileInEditor(filePath: string): Promise<void> {
