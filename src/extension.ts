@@ -58,11 +58,6 @@ export function activate(context: vscode.ExtensionContext) {
                     } else {
                         folderPath = path.join(basePath);
                     }
-
-                    // Create the directory if it doesn't exist
-                    if (!fs.existsSync(folderPath)) {
-                        fs.mkdirSync(folderPath, { recursive: true });
-                    }
                 } else {
                     // User cancelled the selection
                     return;
@@ -95,7 +90,7 @@ export function activate(context: vscode.ExtensionContext) {
                 // Write the .tsx and index.ts files
                 const componentDir = path.join(folderPath, componentName);
                 if (!fs.existsSync(componentDir)) {
-                    fs.mkdirSync(componentDir);
+                    fs.mkdirSync(componentDir, { recursive: true });
                 }
 
                 fs.writeFileSync(
