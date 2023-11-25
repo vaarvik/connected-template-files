@@ -14,7 +14,7 @@ To install Create Template Files, follow these steps:
 
 1. Open **Visual Studio Code**.
 2. Press `Ctrl+P` to open the quick open dialogue.
-3. Type `ext install [your.extension.identifier]` and press `Enter`.
+3. Type `ext install vaarvik.connected-template-files` and press `Enter`.
 4. You can also search for `Create Template Files` in the Extensions view (`Ctrl+Shift+X`).
 
 ## Usage

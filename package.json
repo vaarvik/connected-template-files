@@ -3,7 +3,11 @@
     "displayName": "Connected Template Files",
     "description": "Create multiple connected files easy",
     "publisher": "vaarvik",
-    "version": "1.0.0",
+    "version": "1.0.1",
+    "icon": "images/icon.png",
+    "repository": {
+        "url": "https://github.com/vaarvik/connected-template-files"
+    },
     "engines": {
         "vscode": "^1.84.0"
     },
