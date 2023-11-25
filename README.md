@@ -1,6 +1,6 @@
-# Create Template Files
+# Connected Template Files
 
-Create Template Files is a Visual Studio Code extension designed to streamline the development workflow by automating the creation of component files and structures within your project. It offers a convenient way to quickly generate and organize new components in your workspace.
+Connected Template Files is a Visual Studio Code extension designed to streamline the development workflow by automating the creation of component files and structures within your project. It offers a convenient way to quickly generate and organize new components in your workspace.
 
 ## Features
 
@@ -10,12 +10,12 @@ Create Template Files is a Visual Studio Code extension designed to streamline t
 
 ## Installation
 
-To install Create Template Files, follow these steps:
+To install Connected Template Files, follow these steps:
 
 1. Open **Visual Studio Code**.
 2. Press `Ctrl+P` to open the quick open dialogue.
 3. Type `ext install vaarvik.connected-template-files` and press `Enter`.
-4. You can also search for `Create Template Files` in the Extensions view (`Ctrl+Shift+X`).
+4. You can also search for `Connected Template Files` in the Extensions view (`Ctrl+Shift+X`).
 
 ## Usage
 
@@ -34,7 +34,7 @@ To install Create Template Files, follow these steps:
 
 ## Contributing
 
-Contributions to Create Template Files are welcome! If you have suggestions or improvements, feel free to fork the repository and submit a pull request.
+Contributions to Connected Template Files are welcome! If you have suggestions or improvements, feel free to fork the repository and submit a pull request.
 
 ## License
 
