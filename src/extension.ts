@@ -6,18 +6,75 @@ export function activate(context: vscode.ExtensionContext) {
     let disposable = vscode.commands.registerCommand(
         'connected-template-files.createComponent',
         async (uri) => {
-            if (!uri) {
-                vscode.window.showErrorMessage('No folder selected');
-                return;
+            let folderPath;
+
+            // Check if the action is triggered by right-clicking on a folder
+            if (uri && uri.fsPath) {
+                folderPath = uri.fsPath;
+            } else {
+                const yesString = 'Yes, use current directory';
+                const noString = 'No, specify a different directory';
+
+                // Prompt the user
+                const useCurrentDirectoryResponse =
+                    await vscode.window.showQuickPick([yesString, noString], {
+                        placeHolder:
+                            'Do you want to use the current directory?',
+                    });
+
+                if (useCurrentDirectoryResponse === yesString) {
+                    // Use the current file's directory
+                    const activeEditor = vscode.window.activeTextEditor;
+                    if (activeEditor) {
+                        folderPath = path.dirname(
+                            activeEditor.document.uri.fsPath
+                        );
+                    } else {
+                        vscode.window.showErrorMessage('No active file');
+                        return;
+                    }
+                } else if (useCurrentDirectoryResponse === noString) {
+                    // Allow the user to specify a directory
+                    const inputFolderPath = await vscode.window.showInputBox({
+                        prompt: 'Enter the path for the new component (relative or absolute)',
+                    });
+                    if (!inputFolderPath) return; // exit if no path is provided
+
+                    // Determine the base path
+                    const activeEditor = vscode.window.activeTextEditor;
+                    const activeEditorPath = activeEditor
+                        ? path.dirname(activeEditor.document.uri.fsPath)
+                        : null;
+                    const workspaceRoot = vscode.workspace.rootPath || '';
+                    const basePath = activeEditorPath || workspaceRoot;
+
+                    // Resolve the path
+                    if (inputFolderPath.startsWith('/')) {
+                        // Absolute path from the workspace root
+                        folderPath = path.join(workspaceRoot, inputFolderPath);
+                    } else if (inputFolderPath.startsWith('.')) {
+                        // Relative path from the active file's directory or workspace root
+                        folderPath = path.resolve(basePath, inputFolderPath);
+                    } else {
+                        folderPath = path.join(basePath);
+                    }
+
+                    // Create the directory if it doesn't exist
+                    if (!fs.existsSync(folderPath)) {
+                        fs.mkdirSync(folderPath, { recursive: true });
+                    }
+                } else {
+                    // User cancelled the selection
+                    return;
+                }
             }
+
             // Ask for the component name
             const componentName = await vscode.window.showInputBox({
                 prompt: 'Enter Component Name',
             });
 
             if (!componentName) return; // exit if no name is provided
-
-            const folderPath = uri.fsPath;
 
             // Template content as strings
             const componentTemplate = ``;
